@@ -27,18 +27,18 @@ int roll(int n, int d) {
 }
 
 void main() {
-	writef("Syntax example: 1d20 + 5, 1d8+2d6+2\n");
+	writef("Syntax example: sword 1d20 + 5, 1d8+2d6 (fire)+2 \n");
 	noecho();
 	raw();
 
 	int sign = 1;
 	string prev = "";
 	while (1) {
-		auto line = readline("> ");
-		if ("exit" == line || "quit" == line) break;
+		auto line = readline("> ") ~ " ";
+		if ("exit " == line || "quit " == line) break;
 		try {
 			int sum = 0;
-			line = line.replaceAll(regex("[ \t\n]"), "");
+			line = line.replaceAll(regex("[ \t\n]"), " ");
 			if (!line.length) {
 				line = prev;//repeat on empty string
 				writef("\033[1A");//move cursor up
@@ -51,7 +51,7 @@ void main() {
 				
 			sign = 1;
 			while (line.length) {
-				if (matches("^[0-9]*d[0-9]+")) {
+				if (matches("^[0-9]*d[0-9]+")) { //die code
 					uint n = 1;
 					if ('d' != line[0]) {
 						n = line.parse!uint;
@@ -62,10 +62,15 @@ void main() {
 					writef("%s ", r);
 					sum += sign * r;
 				}
-				else if (matches("^[0-9]+")) {
+				else if (matches("^[0-9]+")) { // constant
 					auto n = line.parse!uint;
 					writef("%s ", n);
 					sum += sign * n;
+				}
+				else if (0 != line.indexOfAny("+-, ")) {//comment
+					auto offset = line.indexOfAny("+-, ");
+					writef("\x1b[38;5;245m%s\x1b[0m ", line[0..offset]);
+					line = line[offset..$];
 				}
 
 				if (line.length > 0) {
@@ -73,20 +78,24 @@ void main() {
 						case '+':
 							sign = 1;
 							writef("+ ");
+							line = line[1..$];
 							break;
 						case '-':
 							writef("- ");
 							sign = -1;
+							line = line[1..$];
 							break;
 						case ',':
 							writef("=\x1b[34;1m %s \x1b[0m, ", sum);
 							sum = 0;
+							line = line[1..$];
+							break;
+						case ' ':
+							line = line[1..$];
 							break;
 						default:
-							writef("syntax error (%s)\n", line);
-							goto next;
+							break;
 					}
-					line = line[1..$];
 				}
 			}
 			writef("=\x1b[34;1m %s \x1b[0m\n", sum);
