@@ -36,25 +36,26 @@ void main() {
 	writef("Syntax example: sword 1d20 + 5, 1d8+2d6 (fire)+2 \n");
 	noecho();
 	raw();
+	string line;
+	
+	bool matches(string reg) {
+		return line.matchFirst(regex(reg, "m")).length() > 0;
+	}
 
 	int sign = 1;
 	string prev = "";
 	while (1) {
-		auto line = readline("> ") ~ " ";
+		line = readline("> ") ~ " ";
 		if ("exit " == line || "quit " == line) break;
 		try {
 			int sum = 0;
 			line = line.replaceAll(regex("[ \t\n]"), " ");
-			if (!line.length) {
+			if (matches("^ *$")) {
 				line = prev;//repeat on empty string
 				writef("\033[1A");//move cursor up
 			}
 			prev = line;
-
-			bool matches(string reg) {
-				return line.matchFirst(regex(reg, "m")).length() > 0;
-			}
-				
+			
 			sign = 1;
 			while (line.length) {
 				if (matches("^[0-9]*d[0-9]+")) { //die code
@@ -106,7 +107,7 @@ void main() {
 			}
 			writef("=\x1b[34;1m %s \x1b[0m\n", sum);
 		}
-		catch {
+		catch (Throwable) {
 			writef("syntax error\n");
 		}
 		next:;
