@@ -42,7 +42,7 @@ void parseLine(string line) {
 	int sign = 1;
 	int sum = 0;
 	line = line.replaceAll(regex("[ \t\n]"), " ");
-	if (0 == line.length) {
+	if (matches("^ $")) {
 		line = prev;//repeat on empty string
 		writef("\033[1A");//move cursor up
 	}
