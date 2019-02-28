@@ -47,11 +47,6 @@ void main(string[] argv) {
 	raw();
 
 	writef("Syntax example: sword 1d20 + 5, 1d8+2d6 (fire)+2 \n");
-	//Sort of issue: the +s are unnecessary.  - signs toggle whether the next number will
-	//be added or subtracted, but it starts out as "add" whether or not a + appears. "sword 1d20 5, 1d8 2d6 (fire) 2"
-	//is equivalent to the above.  The comma is syntactically significant, though.
-	//5 - + 6 is equivalent to 5 + 6 or 5 6.  All this doesn't matter if stuff is entered in the canonical format, but
-	//it's still odd enough that I'm tempted to write a proper LR parser.
 	
 	while (1) {
 		string line = readline("> ") ~ " ";
