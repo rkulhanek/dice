@@ -29,9 +29,12 @@ This uses the standard Unix readline library to let you cycle through the comman
 
 ## Dependencies
 
-### Compiler
+### Compilers
  * dmd (or another D compiler if you adjust the makefile)
+ * flex/bison (again, you can probably use any lex/yacc if you adjust the makefile)
+ * gcc
 
 ### Libraries
  * readline
  * ncurses
+ * GNU libc (for vasprintf)
