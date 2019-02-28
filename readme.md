@@ -4,6 +4,8 @@ This is a general dice roller for tabletop RPGs.
 Enter dice codes in any of the standard notations.
 e.g. ```1d20+5, 2d6, d10 + 2, d17-12``` will all work.
 
+Supported operators: + - * / %
+
 Separate rolls can be entered in the same line by separating them with commas.  So, e.g.  ```1d20+5, 2d6, d10 + 2, d17-12``` will roll all four of those and display the results separately.
 
 If a single roll adds together separate dice codes, it'll display them all separately, then display the total.
@@ -14,6 +16,10 @@ Any text that isn't a dice code and doesn't contain any of these characters: ```
 So to bring it all together, if you enter
 ```sword 1d20 + 5, 1d8+2d6 (fire)+2``` will result in something like:
 ```sword 8 + 5 = 13, 3 + 10 (fire) + 2 = 15```
+
+If you call dice with the -q command line option, the intermediate results will not be printed. So the above option will instead result in
+```sword 13, (fire) 15```
+
 
 ## Command History
 This uses the standard Unix readline library to let you cycle through the command history.  Full documentation for that exists elsewhere, but the most common commands you'll be using are:
