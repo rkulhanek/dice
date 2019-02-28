@@ -1,3 +1,5 @@
-dice.o
+*.o
 dice
-
+lex.yy.c
+dice.tab.h
+dice.tab.c
