@@ -91,6 +91,7 @@ void parseLine(string line) {
 				case ',':
 					writef("=\x1b[34;1m %s \x1b[0m, ", sum);
 					sum = 0;
+					sign = 1;
 					line = line[1..$];
 					break;
 				case ' ':
