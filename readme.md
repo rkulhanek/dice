@@ -20,6 +20,8 @@ So to bring it all together, if you enter
 If you call dice with the -q command line option, the intermediate results will not be printed. So the above option will instead result in
 ```sword 13, (fire) 15```
 
+## Exiting
+Just send SIGINT with Ctrl+C
 
 ## Command History
 This uses the standard Unix readline library to let you cycle through the command history.  Full documentation for that exists elsewhere, but the most common commands you'll be using are:

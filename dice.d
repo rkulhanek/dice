@@ -32,7 +32,7 @@ int roll(int n, int d) {
 	return sum;
 }
 
-void main(string[] argv) {
+int main(string[] argv) {
 	bool quiet = 0;
 	auto opts = getopt(argv,
 		"q|quiet", "By default, prints intermediate results. Quiet makes it only print the final sum.", &quiet,
@@ -41,6 +41,7 @@ void main(string[] argv) {
 
 	if (opts.helpWanted) {
 		defaultGetoptPrinter("", opts.options);
+		return 1;
 	}
 	
 	noecho();
@@ -61,5 +62,6 @@ void main(string[] argv) {
 		}
 		next:;
 	}
+	return 0;
 }
 
