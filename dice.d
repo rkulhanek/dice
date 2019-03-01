@@ -15,7 +15,7 @@ extern (C) {
 	char *readline(const char*);
 	void add_history(const char*);
 	void parse_line(const char*);
-	extern __gshared int verbose;
+	extern __gshared int verbose, yydebug;
 }
 
 string readline(string prompt) {
@@ -34,10 +34,13 @@ int roll(int n, int d) {
 
 int main(string[] argv) {
 	bool quiet = 0;
+	bool debugmode = 0;
 	auto opts = getopt(argv,
 		"q|quiet", "By default, prints intermediate results. Quiet makes it only print the final sum.", &quiet,
+		"debug", "set yacc's debug output on", &debugmode,
 	);
 	verbose = !quiet;
+	yydebug = debugmode;
 
 	if (opts.helpWanted) {
 		defaultGetoptPrinter("", opts.options);

@@ -109,8 +109,8 @@ exprlst: exprlst expr DELIM {
 		printf("%s%s", $3, ('\n' == *$3) ? "" : " ");
 		free_alloced();
 	}
-	| COMMENT {
-		COLOR(GREY, "%s ", $1);
+	| exprlst COMMENT {
+		COLOR(GREY, "%s ", $2);
 	}
 	| exprlst error
 	| error
