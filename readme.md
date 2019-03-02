@@ -20,7 +20,7 @@ If you call dice with the -q command line option, the intermediate results will 
 ```sword 13, (fire) 15```
 
 ## Exiting
-Just send SIGINT with Ctrl+C
+> exit
 
 ## Command History
 This uses the standard Unix readline library to let you cycle through the command history.  Full documentation for that exists elsewhere, but the most common commands you'll be using are:
@@ -28,6 +28,8 @@ This uses the standard Unix readline library to let you cycle through the comman
 ```<up>```, ```<down>``` : cycle through previous commands
 
 ```<ctrl-r>``` keyword ```<enter>``` : run the last command containing "keyword".  You can cycle through them in reverse order by hitting ```<ctrl-r>``` again before hitting ```<enter>```.
+
+Entering a blank line reruns the previous command.
 
 ## Dependencies
 

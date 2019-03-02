@@ -51,10 +51,13 @@ int main(string[] argv) {
 	raw();
 
 	writef("Syntax example: sword 1d20 + 5, 1d8+2d6 (fire)+2 \n");
-	
+
+	string prevLine = "";
 	while (1) {
-		string line = readline("> ") ~ " ";
-		if ("exit " == line || "quit " == line) break;
+		string line = readline("> ");
+		if ("exit " == line) break;
+		if (!line.length) line = prevLine;
+		prevLine = line;
 		try {
 			//parseLine(line);
 			line ~= "\n";
@@ -63,7 +66,6 @@ int main(string[] argv) {
 		catch (Throwable) {
 			writef("syntax error\n");
 		}
-		next:;
 	}
 	return 0;
 }
