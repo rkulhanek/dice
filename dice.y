@@ -98,7 +98,8 @@ char *format(const char *fmt, ...) {
 %token D
 %token <d> NUMBER
 %token <s> COMMENT DELIM
-%left '+' '-' '*' '/'
+%left '+' '-'
+%left '*' '/'
 %%
 
 program: exprlst { }
