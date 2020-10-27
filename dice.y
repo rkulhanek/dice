@@ -128,10 +128,10 @@ expr:
 	| expr '*' expr { OP_EXPR($$, $1, $3, *) }
 	| expr '/' expr { OP_EXPR($$, $1, $3, /) }
 	| expr '%' expr { OP_EXPR($$, $1, $3, %) }
-	/*| '(' expr ')' {
+	| '(' expr ')' {
 		$$.val = $2.val;
 		$$.lbl = verbose ? format("( %s)", $2.lbl) : $2.lbl;
-	}*//* Possible syntax error if they're part of a comment. Which is more common than having actual parenthesized dice codes */
+	}/* TODO: Possible syntax error if they're part of a comment. */
 	| diecode {
 		$$.val = roll($1);
 		$$.lbl = verbose ? format("%d ", $$.val) : "";

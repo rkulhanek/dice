@@ -31,12 +31,13 @@ void parse_line(const char *s) {
 
 %%
 
+[()]+ { return *yytext; }
 [0-9]+ { yylval.d = atoi(yytext); return NUMBER; }
 [-+*/] { return *yytext; }
 [\n,] { yylval.s = yytext; return DELIM; }
-[^-+0-9, \t]+d { yylval.s = yytext; return COMMENT; }
-d[^-+0-9, \t]+ { yylval.s = yytext; return COMMENT; }
-[^-+*/0-9d,\n \t]+ { yylval.s = yytext; return COMMENT; }
+[^-+*/%0-9, \t]+d { yylval.s = yytext; return COMMENT; }
+d[^-+*/%0-9, \t]+ { yylval.s = yytext; return COMMENT; }
+[^-+*/%0-9d,\n \t]+ { yylval.s = yytext; return COMMENT; }
 d { return D; }
 [ \t] {/* skip whitespace */}
 
